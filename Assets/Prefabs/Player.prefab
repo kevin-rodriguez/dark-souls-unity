@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1657005278952135937}
   - component: {fileID: 2155725705769924765}
   - component: {fileID: 2155725705769924764}
-  - component: {fileID: 2155725705769924762}
-  - component: {fileID: 2155725705769924763}
   - component: {fileID: 2155725705769924767}
+  - component: {fileID: 2155725705769924768}
+  - component: {fileID: 2155725705769924769}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -67,7 +67,7 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.83, z: 0}
---- !u!114 &2155725705769924762
+--- !u!114 &2155725705769924767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,7 +76,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3090444204172385471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ff0bc4e2a2042f1a2fa7b05b8064bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 977a34a06ca364538b48684b2008e05a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2155725705769924768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3090444204172385471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ad12ee8c27f4b0fb0464e841f6d1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 0}
@@ -85,7 +97,7 @@ MonoBehaviour:
   normalCamera: {fileID: 0}
   movementSpeed: 3
   rotationSpeed: 5
---- !u!114 &2155725705769924763
+--- !u!114 &2155725705769924769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +106,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3090444204172385471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5185e5a1fc9ec47509758c9d4b821f1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 262333eb83ab04b2a8182986b68a47e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   horizontal: 0
@@ -105,18 +117,6 @@ MonoBehaviour:
   bInput: 0
   rollFlag: 0
   isInteracting: 0
---- !u!114 &2155725705769924767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3090444204172385471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d781ec7b122614729b3b880447077d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3549832148908534704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,25 +172,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 95640976257318950, guid: e0e1a17ee2a364d688b1856db9e89674, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: d3c0a1549b2c34a93a61aa8b192260d9, type: 2}
-    - target: {fileID: 95640976257318950, guid: e0e1a17ee2a364d688b1856db9e89674, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114100002708281306, guid: e0e1a17ee2a364d688b1856db9e89674, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1331458441594970103, guid: e0e1a17ee2a364d688b1856db9e89674, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0e1a17ee2a364d688b1856db9e89674, type: 3}
---- !u!95 &3463340123276340118 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95640976257318950, guid: e0e1a17ee2a364d688b1856db9e89674, type: 3}
-  m_PrefabInstance: {fileID: 3549832148908534704}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3551081868534374872 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1253086935255656, guid: e0e1a17ee2a364d688b1856db9e89674, type: 3}
@@ -205,10 +189,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3551081868534374872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 242ca9c71dc51475c8d681281a2b5640, type: 3}
+  m_Script: {fileID: 11500000, guid: d3b53aa950e85442c93a26aea248ec11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3463340123276340118}
+  animator: {fileID: 0}
   inputHandler: {fileID: 0}
   playerLocomotion: {fileID: 0}
   canRotate: 1
