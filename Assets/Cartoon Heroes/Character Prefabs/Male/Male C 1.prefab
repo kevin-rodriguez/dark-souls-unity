@@ -1324,7 +1324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4532250632830336}
   - component: {fileID: 95640976257318950}
-  - component: {fileID: 1331458441594970103}
+  - component: {fileID: 870488944}
   m_Layer: 0
   m_Name: Male C 1
   m_TagString: Untagged
@@ -1374,7 +1374,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1331458441594970103
+--- !u!114 &870488944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1387,8 +1387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  inputHandler: {fileID: 0}
-  playerLocomotion: {fileID: 0}
   canRotate: 1
 --- !u!1 &1253961392004976
 GameObject:

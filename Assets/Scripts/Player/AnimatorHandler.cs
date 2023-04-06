@@ -6,15 +6,17 @@ namespace KR
 {
   public class AnimatorHandler : MonoBehaviour
   {
+    PlayerManager playerManager;
     public Animator animator;
-    public InputHandler inputHandler;
-    public PlayerLocomotion playerLocomotion;
+    InputHandler inputHandler;
+    PlayerLocomotion playerLocomotion;
     int vertical;
     int horizontal;
     public bool canRotate;
 
     public void Initialize()
     {
+      playerManager = GetComponentInParent<PlayerManager>();
       animator = GetComponent<Animator>();
       inputHandler = GetComponentInParent<InputHandler>();
       playerLocomotion = GetComponentInParent<PlayerLocomotion>();
@@ -102,7 +104,7 @@ namespace KR
 
     private void OnAnimatorMove()
     {
-      if (inputHandler.isInteracting)
+      if (playerManager.isInteracting)
       {
         float delta = Time.deltaTime;
 

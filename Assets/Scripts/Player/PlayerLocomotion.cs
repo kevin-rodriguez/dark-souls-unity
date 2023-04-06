@@ -6,6 +6,7 @@ namespace KR
 {
   public class PlayerLocomotion : MonoBehaviour
   {
+    PlayerManager playerManager;
     Transform cameraObject;
     InputHandler inputHandler;
     Vector3 moveDirection;
@@ -25,28 +26,17 @@ namespace KR
     [SerializeField]
     private float rotationSpeed = 8;
 
-    public bool isSprinting;
 
 
     void Start()
     {
+      playerManager = GetComponent<PlayerManager>();
       rigidbody = GetComponent<Rigidbody>();
       inputHandler = GetComponent<InputHandler>();
       animatorHandler = GetComponentInChildren<AnimatorHandler>();
       cameraObject = Camera.main.transform;
       myTransform = transform;
       animatorHandler.Initialize();
-    }
-
-    public void Update()
-    {
-      float delta = Time.deltaTime;
-
-      isSprinting = inputHandler.bInput;
-      inputHandler.TickInput(delta);
-
-      HandleMovement(delta);
-      HandleRollAndSprinting(delta);
     }
 
     #region Movement
@@ -75,7 +65,7 @@ namespace KR
       myTransform.rotation = targetRotation;
     }
 
-    private void HandleMovement(float delta)
+    public void HandleMovement(float delta)
     {
       if (!inputHandler.rollFlag)
       {
@@ -89,7 +79,7 @@ namespace KR
         if (inputHandler.sprintFlag)
         {
           speed = sprintSpeed;
-          isSprinting = true;
+          playerManager.isSprinting = true;
         }
 
         moveDirection *= speed;
@@ -97,7 +87,7 @@ namespace KR
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
         rigidbody.velocity = projectedVelocity;
 
-        animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, isSprinting);
+        animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
 
         if (animatorHandler.canRotate)
         {
