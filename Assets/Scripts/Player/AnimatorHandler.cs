@@ -22,7 +22,7 @@ namespace KR
       horizontal = Animator.StringToHash(AnimationTags.HORIZONTAL);
     }
 
-    public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement)
+    public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)
     {
       #region Vertical
       float v = 0;
@@ -71,6 +71,13 @@ namespace KR
       {
         h = 0;
       }
+
+      if (isSprinting)
+      {
+        v = 2;
+        h = horizontalMovement;
+      }
+
       #endregion
 
       animator.SetFloat(vertical, v, 0.1f, Time.deltaTime);

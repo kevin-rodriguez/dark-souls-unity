@@ -22,6 +22,7 @@ namespace KR
     {
       inputHandler.isInteracting = animator.GetBool(AnimationTags.IS_INTERACTING_PARAM);
       inputHandler.rollFlag = false;
+      inputHandler.sprintFlag = false;
     }
   }
 

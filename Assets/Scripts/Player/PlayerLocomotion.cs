@@ -19,9 +19,13 @@ namespace KR
 
     [Header("Stats")]
     [SerializeField]
-    private float movementSpeed = 3;
+    private float movementSpeed = 5;
     [SerializeField]
-    private float rotationSpeed = 5;
+    private float sprintSpeed = 7;
+    [SerializeField]
+    private float rotationSpeed = 8;
+
+    public bool isSprinting;
 
 
     void Start()
@@ -38,6 +42,7 @@ namespace KR
     {
       float delta = Time.deltaTime;
 
+      isSprinting = inputHandler.bInput;
       inputHandler.TickInput(delta);
 
       HandleMovement(delta);
@@ -72,23 +77,34 @@ namespace KR
 
     private void HandleMovement(float delta)
     {
-      moveDirection = cameraObject.forward * inputHandler.vertical;
-      moveDirection += cameraObject.right * inputHandler.horizontal;
-      moveDirection.Normalize();
-      moveDirection.y = 0;
-
-      float speed = movementSpeed;
-      moveDirection *= speed;
-
-      Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
-      rigidbody.velocity = projectedVelocity;
-
-      animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0);
-
-      if (animatorHandler.canRotate)
+      if (!inputHandler.rollFlag)
       {
-        HandleRotation(delta);
+        moveDirection = cameraObject.forward * inputHandler.vertical;
+        moveDirection += cameraObject.right * inputHandler.horizontal;
+        moveDirection.Normalize();
+        moveDirection.y = 0;
+
+        float speed = movementSpeed;
+
+        if (inputHandler.sprintFlag)
+        {
+          speed = sprintSpeed;
+          isSprinting = true;
+        }
+
+        moveDirection *= speed;
+
+        Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
+        rigidbody.velocity = projectedVelocity;
+
+        animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, isSprinting);
+
+        if (animatorHandler.canRotate)
+        {
+          HandleRotation(delta);
+        }
       }
+
     }
 
     public void HandleRollAndSprinting(float delta)

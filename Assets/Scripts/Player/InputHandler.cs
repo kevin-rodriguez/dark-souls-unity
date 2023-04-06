@@ -14,6 +14,8 @@ namespace KR
     public float mouseY;
     public bool bInput;
     public bool rollFlag;
+    public bool sprintFlag;
+    public float rollInputTimer;
     public bool isInteracting;
 
     PlayerControls inputActions;
@@ -36,6 +38,7 @@ namespace KR
         cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
       }
     }
+
     public void OnEnable()
     {
       if (inputActions == null)
@@ -70,11 +73,22 @@ namespace KR
 
     private void HandleRollInput(float delta)
     {
-      bInput = inputActions.PlayerActions.Roll.triggered;
+      bInput = inputActions.PlayerActions.Roll.inProgress;
 
       if (bInput)
       {
-        rollFlag = true;
+        rollInputTimer += delta;
+        sprintFlag = true;
+      }
+      else
+      {
+        if (rollInputTimer > 0 && rollInputTimer < 0.5f)
+        {
+          sprintFlag = false;
+          rollFlag = true;
+        }
+
+        rollInputTimer = 0;
       }
     }
   }
