@@ -15,6 +15,8 @@ namespace KR
     [Header("Player Flags")]
     public bool isInteracting;
     public bool isSprinting;
+    public bool isInAir;
+    public bool isGrounded;
 
     private void Awake()
     {
@@ -38,22 +40,35 @@ namespace KR
 
       playerLocomotion.HandleMovement(delta);
       playerLocomotion.HandleRollAndSprinting(delta);
+      playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
     }
 
     private void LateUpdate()
     {
       float delta = Time.deltaTime;
 
+      HandleCamera(delta);
+
+      inputHandler.rollFlag = false;
+      inputHandler.sprintFlag = false;
+      isSprinting = inputHandler.bInput;
+
+      if (isInAir)
+      {
+        playerLocomotion.inAirTimer += delta;
+      }
+    }
+
+    void HandleCamera(float delta)
+    {
       if (cameraHandler != null)
       {
         cameraHandler.FollowTarget(delta);
         cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
       }
-
-      inputHandler.rollFlag = false;
-      inputHandler.sprintFlag = false;
-      isSprinting = inputHandler.bInput;
     }
+
+
   }
 
 }
