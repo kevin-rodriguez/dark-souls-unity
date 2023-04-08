@@ -89,10 +89,14 @@ namespace KR
 
         float speed = movementSpeed;
 
-        if (inputHandler.sprintFlag)
+        if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5)
         {
           speed = sprintSpeed;
           playerManager.isSprinting = true;
+        }
+        else
+        {
+          playerManager.isSprinting = false;
         }
 
         moveDirection *= speed;
@@ -130,7 +134,8 @@ namespace KR
           }
           else
           {
-            animatorHandler.PlayTargetAnimation(AnimationTags.SHIELD_ANIMATION, true);
+            //animatorHandler.PlayTargetAnimation(AnimationTags.SHIELD_ANIMATION, true);
+            //TODO: Implement block
           }
         }
       }

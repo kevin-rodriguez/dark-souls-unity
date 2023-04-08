@@ -51,7 +51,6 @@ namespace KR
 
       inputHandler.rollFlag = false;
       inputHandler.sprintFlag = false;
-      isSprinting = inputHandler.bInput;
 
       if (isInAir)
       {
