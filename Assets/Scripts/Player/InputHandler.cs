@@ -12,15 +12,23 @@ namespace KR
     public float moveAmount;
     public float mouseX;
     public float mouseY;
-    public bool bInput;
+    public bool b_Input, rb_Input, rt_Input;
     public bool rollFlag;
     public bool sprintFlag;
     public float rollInputTimer;
 
     PlayerControls inputActions;
+    PlayerAttacker playerAttacker;
+    PlayerInventory playerInventory;
     CameraHandler cameraHandler;
     Vector2 movementInput;
     Vector2 cameraInput;
+
+    private void Awake()
+    {
+      playerAttacker = GetComponent<PlayerAttacker>();
+      playerInventory = GetComponent<PlayerInventory>();
+    }
 
     public void OnEnable()
     {
@@ -43,6 +51,7 @@ namespace KR
     {
       MoveInput(delta);
       HandleRollInput(delta);
+      HandleAttackInput(delta);
     }
 
     private void MoveInput(float delta)
@@ -56,9 +65,9 @@ namespace KR
 
     private void HandleRollInput(float delta)
     {
-      bInput = inputActions.PlayerActions.Roll.inProgress;
+      b_Input = inputActions.PlayerActions.Roll.inProgress;
 
-      if (bInput)
+      if (b_Input)
       {
         rollInputTimer += delta;
         sprintFlag = true;
@@ -74,6 +83,23 @@ namespace KR
         rollInputTimer = 0;
       }
     }
-  }
+    private void HandleAttackInput(float delta)
+    {
+      inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+      inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
+      // RB/RT Handle right hand weapons
+      if (rb_Input)
+      {
+        playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+      }
+
+      if (rt_Input)
+      {
+        playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+      }
+
+    }
+  }
 }
+

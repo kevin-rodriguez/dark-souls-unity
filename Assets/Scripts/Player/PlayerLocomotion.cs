@@ -187,7 +187,7 @@ namespace KR
           }
           else
           {
-            animatorHandler.PlayTargetAnimation(AnimationTags.LOCOMOTION, false);
+            animatorHandler.PlayTargetAnimation(AnimationTags.EMPTY, false);
           }
 
           playerManager.isInAir = false;

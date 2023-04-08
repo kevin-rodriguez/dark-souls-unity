@@ -18,6 +18,7 @@ namespace KR
     public const string IS_INTERACTING_PARAM = "isInteracting";
 
     public const string LOCOMOTION = "Locomotion";
+    public const string EMPTY = "Empty";
     public const string ROLL_ANIMATION = "Roll";
     public const string SHIELD_ANIMATION = "Shield";
     public const string FALLING_ANIMATION = "Falling";
