@@ -23,6 +23,9 @@ namespace KR
     public const string SHIELD_ANIMATION = "Shield";
     public const string FALLING_ANIMATION = "Falling";
     public const string LAND_ANIMATION = "Land";
+    public const string DAMAGE_LIGHT_ANIMATION = "Damage_Light";
+    public const string DAMAGE_HEAVY_ANIMATION = "Damage_Heavy";
+    public const string DEATH_ANIMATION = "Death";
   }
 }
 
