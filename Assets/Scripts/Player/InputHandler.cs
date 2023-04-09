@@ -20,6 +20,7 @@ namespace KR
     PlayerControls inputActions;
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
+    PlayerManager playerManager;
     CameraHandler cameraHandler;
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -28,6 +29,7 @@ namespace KR
     {
       playerAttacker = GetComponent<PlayerAttacker>();
       playerInventory = GetComponent<PlayerInventory>();
+      playerManager = GetComponent<PlayerManager>();
     }
 
     public void OnEnable()
@@ -88,15 +90,18 @@ namespace KR
       inputActions.PlayerActions.RB.performed += i => rb_Input = true;
       inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
-      // RB/RT Handle right hand weapons
-      if (rb_Input)
+      if (!playerManager.isInteracting)
       {
-        playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
-      }
+        // RB/RT Handle right hand weapons
+        if (rb_Input)
+        {
+          playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+        }
 
-      if (rt_Input)
-      {
-        playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+        if (rt_Input)
+        {
+          playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+        }
       }
 
     }
