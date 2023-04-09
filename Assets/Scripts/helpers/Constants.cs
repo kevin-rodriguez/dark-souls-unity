@@ -7,7 +7,9 @@ namespace KR
 
   public class Tags
   {
-    //
+    public const string PLAYER_TAG = "Player";
+    public const string ENEMY_TAG = "Enemy";
+    public const string HITTABLE_TAG = "Hittable";
   }
 
   public static class AnimationTags

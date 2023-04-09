@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 2155725705769924780}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: 791854803fa244bb8bf3e2aa330a2a51, type: 2}
-  leftWeapon: {fileID: 0}
+  leftWeapon: {fileID: 11400000, guid: 791854803fa244bb8bf3e2aa330a2a51, type: 2}
 --- !u!114 &2155725705769924773
 MonoBehaviour:
   m_ObjectHideFlags: 0
