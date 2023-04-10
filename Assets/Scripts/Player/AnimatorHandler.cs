@@ -102,6 +102,16 @@ namespace KR
       canRotate = false;
     }
 
+    public void EnableCombo()
+    {
+      animator.SetBool(AnimationTags.CAN_DO_COMBO_PARAM, true);
+    }
+
+    public void DisableCombo()
+    {
+      animator.SetBool(AnimationTags.CAN_DO_COMBO_PARAM, false);
+    }
+
     private void OnAnimatorMove()
     {
       if (playerManager.isInteracting)

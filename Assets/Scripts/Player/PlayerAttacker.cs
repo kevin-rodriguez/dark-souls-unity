@@ -8,20 +8,40 @@ namespace KR
   {
 
     AnimatorHandler animatorHandler;
+    InputHandler inputHandler;
+    public string lastAttack;
 
 
     private void Awake()
     {
       animatorHandler = GetComponentInChildren<AnimatorHandler>();
+      inputHandler = GetComponent<InputHandler>();
+    }
+
+    public void HandleWeaponCombo(WeaponItem weapon)
+    {
+      if (inputHandler.comboFlag)
+      {
+        animatorHandler.animator.SetBool(AnimationTags.CAN_DO_COMBO_PARAM, false);
+
+        if (lastAttack == weapon.OH_Light_Attack_01)
+        {
+          animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_02, true);
+        }
+      }
+
+
     }
 
     public void HandleLightAttack(WeaponItem weapon)
     {
-      animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack, true);
+      animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_01, true);
+      lastAttack = weapon.OH_Light_Attack_01;
     }
     public void HandleHeavyAttack(WeaponItem weapon)
     {
-      animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack, true);
+      animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_01, true);
+      lastAttack = weapon.OH_Heavy_Attack_01;
     }
   }
 

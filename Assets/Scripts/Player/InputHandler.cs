@@ -15,6 +15,7 @@ namespace KR
     public bool b_Input, rb_Input, rt_Input;
     public bool rollFlag;
     public bool sprintFlag;
+    public bool comboFlag;
     public float rollInputTimer;
 
     PlayerControls inputActions;
@@ -90,18 +91,27 @@ namespace KR
       inputActions.PlayerActions.RB.performed += i => rb_Input = true;
       inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
-      if (!playerManager.isInteracting)
+
+      // RB/RT Handle right hand weapons
+      if (rb_Input)
       {
-        // RB/RT Handle right hand weapons
-        if (rb_Input)
+        if (playerManager.canDoCombo)
         {
-          playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+          comboFlag = true;
+          playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+          comboFlag = false;
+        }
+        else
+        {
+          if (!playerManager.isInteracting)
+            playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
         }
 
-        if (rt_Input)
-        {
-          playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
-        }
+      }
+
+      if (rt_Input)
+      {
+        playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
       }
 
     }

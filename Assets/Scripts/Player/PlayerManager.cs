@@ -17,6 +17,7 @@ namespace KR
     public bool isSprinting;
     public bool isInAir;
     public bool isGrounded;
+    public bool canDoCombo;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ namespace KR
       float delta = Time.deltaTime;
 
       isInteracting = animator.GetBool(AnimationTags.IS_INTERACTING_PARAM);
+      canDoCombo = animator.GetBool(AnimationTags.CAN_DO_COMBO_PARAM);
 
       inputHandler.TickInput(delta);
 
