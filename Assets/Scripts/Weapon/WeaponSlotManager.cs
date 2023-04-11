@@ -10,8 +10,11 @@ namespace KR
 
     DamageCollider leftHandWeaponCollider, rightHandWeaponCollider;
 
+    Animator animator;
+
     private void Awake()
     {
+      animator = GetComponent<Animator>();
       WeaponHolderSlot[] weaponHolderSlot = GetComponentsInChildren<WeaponHolderSlot>();
 
       foreach (WeaponHolderSlot weaponSlot in weaponHolderSlot)
@@ -33,11 +36,33 @@ namespace KR
       {
         leftHandSlot.LoadWeaponModel(weaponItem);
         LoadLeftWeaponDamageCollider();
+
+        #region Handle Left Weapon Idle Animation
+        if (weaponItem != null)
+        {
+          animator.CrossFade(weaponItem.Left_Hand_Idle, 0.2f);
+        }
+        else
+        {
+          animator.CrossFade(AnimationTags.LEFT_ARM_EMPTY, 0.2f);
+        }
+        #endregion
       }
       else
       {
         rightHandSlot.LoadWeaponModel(weaponItem);
         LoadRightWeaponDamageCollider();
+
+        #region Handle Right Weapon Idle Animation
+        if (weaponItem != null)
+        {
+          animator.CrossFade(weaponItem.Right_Hand_Idle, 0.2f);
+        }
+        else
+        {
+          animator.CrossFade(AnimationTags.RIGHT_ARM_EMPTY, 0.2f);
+        }
+        #endregion
       }
     }
 
