@@ -1095,18 +1095,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2155725705769924770, guid: 28ba06636258348cfbfff398320c2677, type: 3}
-      propertyPath: unarmedWeapon
-      value: 
-      objectReference: {fileID: 11400000, guid: 24d0303fbf1ad425a9a7e8b0974b4291, type: 2}
-    - target: {fileID: 2155725705769924770, guid: 28ba06636258348cfbfff398320c2677, type: 3}
-      propertyPath: weaponsInLeftHandSlots.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 791854803fa244bb8bf3e2aa330a2a51, type: 2}
-    - target: {fileID: 2155725705769924770, guid: 28ba06636258348cfbfff398320c2677, type: 3}
-      propertyPath: weaponsInRightHandSlots.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 791854803fa244bb8bf3e2aa330a2a51, type: 2}
     - target: {fileID: 2155725705769924780, guid: 28ba06636258348cfbfff398320c2677, type: 3}
       propertyPath: healthBar
       value: 
