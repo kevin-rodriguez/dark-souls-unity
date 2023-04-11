@@ -13,6 +13,7 @@ namespace KR
     public float mouseX;
     public float mouseY;
     public bool b_Input, rb_Input, rt_Input;
+    public bool d_Pad_Up, d_Pad_Down, d_Pad_Left, d_Pad_Right;
     public bool rollFlag;
     public bool sprintFlag;
     public bool comboFlag;
@@ -55,6 +56,7 @@ namespace KR
       MoveInput(delta);
       HandleRollInput(delta);
       HandleAttackInput(delta);
+      HandleQuickSlotInput();
     }
 
     private void MoveInput(float delta)
@@ -114,6 +116,22 @@ namespace KR
         playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
       }
 
+    }
+
+    private void HandleQuickSlotInput()
+    {
+      inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+      inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+
+      if (d_Pad_Right)
+      {
+        playerInventory.ChangeRightWeapon();
+      }
+
+      if (d_Pad_Left)
+      {
+        playerInventory.ChangeLeftWeapon();
+      }
     }
   }
 }
