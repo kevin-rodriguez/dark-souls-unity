@@ -11,10 +11,12 @@ namespace KR
     DamageCollider leftHandWeaponCollider, rightHandWeaponCollider;
 
     Animator animator;
+    QuickSlotsUI quickSlotsUI;
 
     private void Awake()
     {
       animator = GetComponent<Animator>();
+      quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
       WeaponHolderSlot[] weaponHolderSlot = GetComponentsInChildren<WeaponHolderSlot>();
 
       foreach (WeaponHolderSlot weaponSlot in weaponHolderSlot)
@@ -36,6 +38,7 @@ namespace KR
       {
         leftHandSlot.LoadWeaponModel(weaponItem);
         LoadLeftWeaponDamageCollider();
+        quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
 
         #region Handle Left Weapon Idle Animation
         if (weaponItem != null)
@@ -52,6 +55,7 @@ namespace KR
       {
         rightHandSlot.LoadWeaponModel(weaponItem);
         LoadRightWeaponDamageCollider();
+        quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
 
         #region Handle Right Weapon Idle Animation
         if (weaponItem != null)
