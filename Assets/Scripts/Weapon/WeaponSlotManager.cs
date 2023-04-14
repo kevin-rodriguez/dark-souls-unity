@@ -10,13 +10,18 @@ namespace KR
 
     DamageCollider leftHandWeaponCollider, rightHandWeaponCollider;
 
+    public WeaponItem attackingWeapon;
+
     Animator animator;
     QuickSlotsUI quickSlotsUI;
+    PlayerStats playerStats;
 
     private void Awake()
     {
       animator = GetComponent<Animator>();
       quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+      playerStats = GetComponentInParent<PlayerStats>();
+
       WeaponHolderSlot[] weaponHolderSlot = GetComponentsInChildren<WeaponHolderSlot>();
 
       foreach (WeaponHolderSlot weaponSlot in weaponHolderSlot)
@@ -102,6 +107,18 @@ namespace KR
       leftHandWeaponCollider.DisableDamageCollider();
     }
 
+    #endregion
+
+    #region Handle Weapon's Stamina
+    public void DrainStaminaLightAttack()
+    {
+      playerStats.TakeStamina(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.lightAttackMultiplier));
+    }
+
+    public void DrainStaminaHeavyAttack()
+    {
+      playerStats.TakeStamina(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.heavyAttackMultiplier));
+    }
     #endregion
   }
 
