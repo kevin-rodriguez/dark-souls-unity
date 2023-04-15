@@ -93,9 +93,8 @@ namespace KR
       inputActions.PlayerActions.RB.performed += i => rb_Input = true;
       inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
-
       // RB/RT Handle right hand weapons
-      if (rb_Input)
+      if (rb_Input || rt_Input)
       {
         if (playerManager.canDoCombo)
         {
@@ -103,19 +102,18 @@ namespace KR
           playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
           comboFlag = false;
         }
-        else
+        else if ((!playerManager.isInteracting))
         {
-          if (!playerManager.isInteracting)
+          if (rb_Input)
+          {
             playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+          }
+          else if (rt_Input)
+          {
+            playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+          }
         }
-
       }
-
-      if (rt_Input)
-      {
-        playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
-      }
-
     }
 
     private void HandleQuickSlotInput()

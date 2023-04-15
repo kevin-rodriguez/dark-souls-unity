@@ -170,8 +170,6 @@ namespace KR
 
       bool hitTheGround = Physics.Raycast(origin, Vector3.down, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck);
 
-      print("Distance from floor: " + Vector3.Distance(transform.position, origin));
-
       if (hitTheGround)
       {
         normalVector = hit.normal;
@@ -182,7 +180,6 @@ namespace KR
         {
           if (inAirTimer > 0.5f)
           {
-            Debug.Log("You were in the air for " + inAirTimer);
             animatorHandler.PlayTargetAnimation(AnimationTags.LAND_ANIMATION, true);
           }
           else

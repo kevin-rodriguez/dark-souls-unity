@@ -30,9 +30,11 @@ namespace KR
         {
           animatorHandler.PlayTargetAnimation(weapon.OH_Light_Attack_02, true);
         }
+        else if (lastAttack == weapon.OH_Heavy_Attack_01)
+        {
+          animatorHandler.PlayTargetAnimation(weapon.OH_Heavy_Attack_02, true);
+        }
       }
-
-
     }
 
     public void HandleLightAttack(WeaponItem weapon)

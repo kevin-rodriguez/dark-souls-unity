@@ -78,15 +78,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8318605
-        functionName: DisableCombo
+      - time: 0.5310327
+        functionName: DrainStaminaLightAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.4103896
-        functionName: DrainStaminaLightAttack
+      - time: 0.8318605
+        functionName: DisableCombo
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
