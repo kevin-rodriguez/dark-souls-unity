@@ -19,6 +19,10 @@ namespace KR
     public bool isGrounded;
     public bool canDoCombo;
 
+    [Header("Interaction")]
+    public float interactionRadius = 0.5f;
+    public float interactionMaxDistance = 1f;
+
     private void Awake()
     {
       cameraHandler = FindObjectOfType<CameraHandler>();
@@ -43,6 +47,8 @@ namespace KR
       playerLocomotion.HandleMovement(delta);
       playerLocomotion.HandleRollAndSprinting(delta);
       playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+
+      CheckForInteractableObject();
     }
 
     private void LateUpdate()
@@ -59,6 +65,7 @@ namespace KR
       inputHandler.d_Pad_Down = false;
       inputHandler.d_Pad_Right = false;
       inputHandler.d_Pad_Left = false;
+      inputHandler.interact_Input = false;
 
       if (isInAir)
       {
@@ -75,7 +82,33 @@ namespace KR
       }
     }
 
+    public void CheckForInteractableObject()
+    {
+      RaycastHit hit;
 
+      if (Physics.SphereCast(transform.position, interactionRadius, transform.forward, out hit, interactionMaxDistance, cameraHandler.ignoreLayers))
+      {
+        print("hit object");
+        if (hit.collider.CompareTag(Tags.INTERACTABLE_TAG))
+        {
+          print("isInteractable");
+          Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+          print(interactableObject);
+
+          if (interactableObject != null)
+          {
+            string interactableText = interactableObject.interactableText;
+            // Set UI text to the interactable object
+            // Enable UI popup
+
+            if (inputHandler.interact_Input)
+            {
+              hit.collider.GetComponent<Interactable>().Interact(this);
+            }
+          }
+        }
+      }
+    }
   }
 
 }

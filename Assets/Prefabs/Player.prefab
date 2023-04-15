@@ -118,6 +118,8 @@ MonoBehaviour:
   isInAir: 0
   isGrounded: 0
   canDoCombo: 0
+  interactionRadius: 0.3
+  interactionMaxDistance: 1
 --- !u!114 &2155725705769924768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +163,7 @@ MonoBehaviour:
   mouseX: 0
   mouseY: 0
   b_Input: 0
+  interact_Input: 0
   rb_Input: 0
   rt_Input: 0
   d_Pad_Up: 0
@@ -198,6 +201,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4621f57fff5e6404b86f642cb4ccac49, type: 2}
   currentRightWeaponIndex: 0
   currentLeftWeaponIndex: 0
+  weaponsInventory: []
 --- !u!114 &2155725705769924773
 MonoBehaviour:
   m_ObjectHideFlags: 0

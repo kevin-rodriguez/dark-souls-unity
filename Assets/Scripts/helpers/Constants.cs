@@ -10,6 +10,7 @@ namespace KR
     public const string PLAYER_TAG = "Player";
     public const string ENEMY_TAG = "Enemy";
     public const string HITTABLE_TAG = "Hittable";
+    public const string INTERACTABLE_TAG = "Interactable";
   }
 
   public static class AnimationTags
@@ -33,6 +34,7 @@ namespace KR
     public const string DAMAGE_LIGHT_ANIMATION = "Damage_Light";
     public const string DAMAGE_HEAVY_ANIMATION = "Damage_Heavy";
     public const string DEATH_ANIMATION = "Death";
+    public const string PICK_UP_ITEM_ANIMATION = "Pick Up Item";
   }
 }
 

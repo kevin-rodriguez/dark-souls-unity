@@ -132,6 +132,9 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   cameraTransform: {fileID: 6861900885161033175}
   cameraPivotTransform: {fileID: 6861900885898235370}
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
   lookSpeed: 0.008
   followSpeed: 0.1
   pivotSpeed: 0.003

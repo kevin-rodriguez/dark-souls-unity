@@ -10,9 +10,9 @@ namespace KR
     public Transform targetTransform;
     public Transform cameraTransform;
     public Transform cameraPivotTransform;
+    public LayerMask ignoreLayers;
     private Transform myTransform;
     private Vector3 cameraTransformPosition;
-    private LayerMask ignoreLayers;
     private Vector3 cameraFollowVelocity = Vector3.zero;
 
     public float lookSpeed = 0.1f;

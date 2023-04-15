@@ -12,7 +12,7 @@ namespace KR
     public float moveAmount;
     public float mouseX;
     public float mouseY;
-    public bool b_Input, rb_Input, rt_Input;
+    public bool b_Input, interact_Input, rb_Input, rt_Input;
     public bool d_Pad_Up, d_Pad_Down, d_Pad_Left, d_Pad_Right;
     public bool rollFlag;
     public bool sprintFlag;
@@ -44,6 +44,8 @@ namespace KR
       }
 
       inputActions.Enable();
+
+      inputActions.PlayerActions.Interact.performed += i => interact_Input = true;
     }
 
     private void OnDisable()
@@ -131,6 +133,7 @@ namespace KR
         playerInventory.ChangeLeftWeapon();
       }
     }
+
   }
 }
 
