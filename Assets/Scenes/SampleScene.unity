@@ -584,6 +584,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7e30eee73c241d5448ce0ac372cf6602, type: 3}
   m_PrefabInstance: {fileID: 933707911}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1075009527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1075009527, guid: f6d650e0583844e04a01ece3f7dfb350, type: 3}
+  m_PrefabInstance: {fileID: 678510373512687554}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1195698961 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1195698961, guid: f6d650e0583844e04a01ece3f7dfb350, type: 3}
+  m_PrefabInstance: {fileID: 678510373512687554}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1305770975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1012,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2155725705769924767, guid: 28ba06636258348cfbfff398320c2677, type: 3}
+      propertyPath: interactableUIGameObject
+      value: 
+      objectReference: {fileID: 1075009527}
+    - target: {fileID: 2155725705769924767, guid: 28ba06636258348cfbfff398320c2677, type: 3}
+      propertyPath: itemInteractableGameObject
+      value: 
+      objectReference: {fileID: 1195698961}
     - target: {fileID: 2155725705769924780, guid: 28ba06636258348cfbfff398320c2677, type: 3}
       propertyPath: healthBar
       value: 

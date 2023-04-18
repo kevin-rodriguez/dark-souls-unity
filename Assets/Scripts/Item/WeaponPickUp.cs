@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace KR
 {
@@ -23,6 +25,10 @@ namespace KR
       playerInventory = playerManager.GetComponent<PlayerInventory>();
       playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
       animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
+
+      playerManager.itemInteractableGameObject.GetComponentInChildren<TMP_Text>().text = weapon.itemName;
+      playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = weapon.itemIcon.texture;
+      playerManager.itemInteractableGameObject.SetActive(true);
 
       playerLocomotion.rigidbody.velocity = Vector3.zero;
       animatorHandler.PlayTargetAnimation(AnimationTags.PICK_UP_ITEM_ANIMATION, true);

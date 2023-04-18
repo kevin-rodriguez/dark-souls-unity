@@ -11,6 +11,9 @@ namespace KR
     PlayerLocomotion playerLocomotion;
     InputHandler inputHandler;
     Animator animator;
+    InteractableUI interactableUI;
+    public GameObject interactableUIGameObject;
+    public GameObject itemInteractableGameObject;
 
     [Header("Player Flags")]
     public bool isInteracting;
@@ -33,6 +36,7 @@ namespace KR
       inputHandler = GetComponent<InputHandler>();
       animator = GetComponentInChildren<Animator>();
       playerLocomotion = GetComponent<PlayerLocomotion>();
+      interactableUI = FindObjectOfType<InteractableUI>();
     }
 
     void Update()
@@ -88,18 +92,16 @@ namespace KR
 
       if (Physics.SphereCast(transform.position, interactionRadius, transform.forward, out hit, interactionMaxDistance, cameraHandler.ignoreLayers))
       {
-        print("hit object");
         if (hit.collider.CompareTag(Tags.INTERACTABLE_TAG))
         {
-          print("isInteractable");
           Interactable interactableObject = hit.collider.GetComponent<Interactable>();
           print(interactableObject);
 
           if (interactableObject != null)
           {
             string interactableText = interactableObject.interactableText;
-            // Set UI text to the interactable object
-            // Enable UI popup
+            interactableUI.interactableText.text = interactableText;
+            interactableUIGameObject.SetActive(true);
 
             if (inputHandler.interact_Input)
             {
@@ -107,6 +109,14 @@ namespace KR
             }
           }
         }
+      }
+      else
+      {
+        if (interactableUIGameObject != null)
+          interactableUIGameObject.SetActive(false);
+
+        if (itemInteractableGameObject != null && inputHandler.interact_Input)
+          itemInteractableGameObject.SetActive(false);
       }
     }
   }
