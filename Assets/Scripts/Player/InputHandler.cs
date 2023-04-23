@@ -12,7 +12,7 @@ namespace KR
     public float moveAmount;
     public float mouseX;
     public float mouseY;
-    public bool b_Input, interact_Input, rb_Input, rt_Input;
+    public bool b_Input, interact_Input, rb_Input, rt_Input, jump_Input;
     public bool d_Pad_Up, d_Pad_Down, d_Pad_Left, d_Pad_Right;
     public bool rollFlag;
     public bool sprintFlag;
@@ -59,6 +59,7 @@ namespace KR
       HandleRollInput(delta);
       HandleAttackInput(delta);
       HandleQuickSlotInput();
+      HandleJumpInput();
     }
 
     private void MoveInput(float delta)
@@ -134,6 +135,15 @@ namespace KR
       }
     }
 
+    private void HandleJumpInput()
+    {
+      inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+
+      if (jump_Input)
+      {
+        // Jump
+      }
+    }
   }
 }
 

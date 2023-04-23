@@ -224,6 +224,26 @@ namespace KR
 
     }
 
+    public void HandleJumping()
+    {
+      if (!playerManager.isInteracting)
+      {
+
+        if (inputHandler.jump_Input)
+        {
+          string jumpAnimation = inputHandler.moveAmount > 0 ?
+            AnimationTags.JUMP_RUNNING_ANIMATION :
+            AnimationTags.JUMP_STANDING_ANIMATION;
+          moveDirection = cameraObject.forward * inputHandler.vertical;
+          moveDirection += cameraObject.right * inputHandler.horizontal;
+          animatorHandler.PlayTargetAnimation(jumpAnimation, true);
+          moveDirection.y = 0;
+
+          Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
+          myTransform.rotation = jumpRotation;
+        }
+      }
+    }
     #endregion
 
   }

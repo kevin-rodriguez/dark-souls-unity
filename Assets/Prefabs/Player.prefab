@@ -168,6 +168,7 @@ MonoBehaviour:
   interact_Input: 0
   rb_Input: 0
   rt_Input: 0
+  jump_Input: 0
   d_Pad_Up: 0
   d_Pad_Down: 0
   d_Pad_Left: 0

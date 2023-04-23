@@ -20,7 +20,9 @@ namespace KR
 
     // Params
     public const string IS_INTERACTING_PARAM = "isInteracting";
+    public const string IS_IN_AIR_PARAM = "isInAir";
     public const string CAN_DO_COMBO_PARAM = "canDoCombo";
+
 
     // Animations
     public const string LOCOMOTION = "Locomotion";
@@ -28,6 +30,8 @@ namespace KR
     public const string RIGHT_ARM_EMPTY = "Right Arm Empty";
     public const string LEFT_ARM_EMPTY = "Left Arm Empty";
     public const string ROLL_ANIMATION = "Roll";
+    public const string JUMP_STANDING_ANIMATION = "Jump_Standing";
+    public const string JUMP_RUNNING_ANIMATION = "Jump_Running";
     public const string SHIELD_ANIMATION = "Shield";
     public const string FALLING_ANIMATION = "Falling";
     public const string LAND_ANIMATION = "Land";

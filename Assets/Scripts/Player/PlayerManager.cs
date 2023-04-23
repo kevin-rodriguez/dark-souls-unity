@@ -45,12 +45,14 @@ namespace KR
 
       isInteracting = animator.GetBool(AnimationTags.IS_INTERACTING_PARAM);
       canDoCombo = animator.GetBool(AnimationTags.CAN_DO_COMBO_PARAM);
+      animator.SetBool(AnimationTags.IS_IN_AIR_PARAM, isInAir);
 
       inputHandler.TickInput(delta);
 
       playerLocomotion.HandleMovement(delta);
       playerLocomotion.HandleRollAndSprinting(delta);
       playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+      playerLocomotion.HandleJumping();
 
       CheckForInteractableObject();
     }
@@ -70,6 +72,7 @@ namespace KR
       inputHandler.d_Pad_Right = false;
       inputHandler.d_Pad_Left = false;
       inputHandler.interact_Input = false;
+      inputHandler.jump_Input = false;
 
       if (isInAir)
       {
