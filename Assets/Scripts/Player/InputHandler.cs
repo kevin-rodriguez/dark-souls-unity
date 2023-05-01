@@ -12,17 +12,20 @@ namespace KR
     public float moveAmount;
     public float mouseX;
     public float mouseY;
-    public bool b_Input, interact_Input, rb_Input, rt_Input, jump_Input;
+    public bool b_Input, interact_Input, rb_Input, rt_Input, jump_Input, inventoryInput;
     public bool d_Pad_Up, d_Pad_Down, d_Pad_Left, d_Pad_Right;
     public bool rollFlag;
     public bool sprintFlag;
     public bool comboFlag;
+    public bool inventoryFlag;
     public float rollInputTimer;
 
     PlayerControls inputActions;
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
+    UIManager uIManager;
+
     CameraHandler cameraHandler;
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -32,6 +35,7 @@ namespace KR
       playerAttacker = GetComponent<PlayerAttacker>();
       playerInventory = GetComponent<PlayerInventory>();
       playerManager = GetComponent<PlayerManager>();
+      uIManager = FindObjectOfType<UIManager>();
     }
 
     public void OnEnable()
@@ -60,6 +64,7 @@ namespace KR
       HandleAttackInput(delta);
       HandleQuickSlotInput();
       HandleJumpInput();
+      HandleInventoryInput();
     }
 
     private void MoveInput(float delta)
@@ -138,10 +143,41 @@ namespace KR
     private void HandleJumpInput()
     {
       inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+    }
 
-      if (jump_Input)
+    private void PauseInputs(bool shouldPause)
+    {
+      if (shouldPause)
       {
-        // Jump
+        inputActions.PlayerMovement.Disable();
+      }
+      else
+      {
+        inputActions.PlayerMovement.Enable();
+      }
+    }
+
+    private void HandleInventoryInput()
+    {
+      inputActions.PlayerActions.Inventory.performed += i => inventoryInput = true;
+
+      if (inventoryInput)
+      {
+        inventoryFlag = !inventoryFlag;
+
+        if (inventoryFlag)
+        {
+          uIManager.OpenSelectWindow();
+          uIManager.UpdateUI();
+        }
+        else
+        {
+          uIManager.CloseSelectWindow();
+          uIManager.CloseAllInventoryWindows();
+        }
+
+        PauseInputs(inventoryFlag);
+        uIManager.hudWindow.SetActive(!inventoryFlag);
       }
     }
   }

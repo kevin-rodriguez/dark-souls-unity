@@ -73,6 +73,7 @@ namespace KR
       inputHandler.d_Pad_Left = false;
       inputHandler.interact_Input = false;
       inputHandler.jump_Input = false;
+      inputHandler.inventoryInput = false;
 
       if (isInAir)
       {
@@ -98,7 +99,6 @@ namespace KR
         if (hit.collider.CompareTag(Tags.INTERACTABLE_TAG))
         {
           Interactable interactableObject = hit.collider.GetComponent<Interactable>();
-          print(interactableObject);
 
           if (interactableObject != null)
           {
