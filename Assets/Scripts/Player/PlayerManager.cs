@@ -49,12 +49,17 @@ namespace KR
 
       inputHandler.TickInput(delta);
 
-      playerLocomotion.HandleMovement(delta);
       playerLocomotion.HandleRollAndSprinting(delta);
-      playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
       playerLocomotion.HandleJumping();
 
       CheckForInteractableObject();
+    }
+
+    private void FixedUpdate()
+    {
+      float delta = Time.deltaTime;
+      playerLocomotion.HandleMovement(delta);
+      playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
     }
 
     private void LateUpdate()
@@ -64,7 +69,6 @@ namespace KR
       HandleCamera(delta);
 
       inputHandler.rollFlag = false;
-      inputHandler.sprintFlag = false;
       inputHandler.rb_Input = false;
       inputHandler.rt_Input = false;
       inputHandler.d_Pad_Up = false;

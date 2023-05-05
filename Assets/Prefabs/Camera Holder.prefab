@@ -135,9 +135,9 @@ MonoBehaviour:
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 0
-  lookSpeed: 0.008
+  lookSpeed: 1600
   followSpeed: 0.1
-  pivotSpeed: 0.003
+  pivotSpeed: 1500
   minimumPivot: -35
   maximumPivot: 35
   cameraSphereRadius: 0.2

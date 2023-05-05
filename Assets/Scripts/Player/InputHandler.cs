@@ -45,11 +45,16 @@ namespace KR
         inputActions = new PlayerControls();
         inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
         inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+        inputActions.PlayerActions.Interact.performed += i => interact_Input = true;
+        inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+        inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+        inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+        inputActions.PlayerActions.Inventory.performed += i => inventoryInput = true;
+        inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+        inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
       }
 
       inputActions.Enable();
-
-      inputActions.PlayerActions.Interact.performed += i => interact_Input = true;
     }
 
     private void OnDisable()
@@ -63,7 +68,6 @@ namespace KR
       HandleRollInput(delta);
       HandleAttackInput(delta);
       HandleQuickSlotInput();
-      HandleJumpInput();
       HandleInventoryInput();
     }
 
@@ -79,11 +83,11 @@ namespace KR
     private void HandleRollInput(float delta)
     {
       b_Input = inputActions.PlayerActions.Roll.inProgress;
+      sprintFlag = b_Input;
 
       if (b_Input)
       {
         rollInputTimer += delta;
-        sprintFlag = true;
       }
       else
       {
@@ -98,9 +102,6 @@ namespace KR
     }
     private void HandleAttackInput(float delta)
     {
-      inputActions.PlayerActions.RB.performed += i => rb_Input = true;
-      inputActions.PlayerActions.RT.performed += i => rt_Input = true;
-
       // RB/RT Handle right hand weapons
       if (rb_Input || rt_Input)
       {
@@ -126,9 +127,6 @@ namespace KR
 
     private void HandleQuickSlotInput()
     {
-      inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
-      inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
-
       if (d_Pad_Right)
       {
         playerInventory.ChangeRightWeapon();
@@ -138,11 +136,6 @@ namespace KR
       {
         playerInventory.ChangeLeftWeapon();
       }
-    }
-
-    private void HandleJumpInput()
-    {
-      inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
     }
 
     private void PauseInputs(bool shouldPause)
@@ -159,8 +152,6 @@ namespace KR
 
     private void HandleInventoryInput()
     {
-      inputActions.PlayerActions.Inventory.performed += i => inventoryInput = true;
-
       if (inventoryInput)
       {
         inventoryFlag = !inventoryFlag;

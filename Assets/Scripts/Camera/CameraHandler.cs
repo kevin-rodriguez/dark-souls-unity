@@ -50,8 +50,8 @@ namespace KR
 
     public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
     {
-      lookAngle += (mouseXInput * lookSpeed) / delta;
-      pivotAngle -= (mouseYInput * pivotSpeed) / delta;
+      lookAngle += mouseXInput * lookSpeed * delta;
+      pivotAngle -= mouseYInput * pivotSpeed * delta;
 
       // Add limits to camera movement
       pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
