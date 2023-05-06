@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace KR
 {
-  public class PlayerManager : MonoBehaviour
+  public class PlayerManager : CharacterManager
   {
 
     CameraHandler cameraHandler;

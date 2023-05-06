@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &835191046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 835191047}
+  m_Layer: 10
+  m_Name: Lock On Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &835191047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835191046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.371, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1657005278952135937}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1771310562
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,6 +99,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3554346737931179568}
+  - {fileID: 835191047}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977a34a06ca364538b48684b2008e05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockOnTransform: {fileID: 835191047}
   interactableUIGameObject: {fileID: 0}
   itemInteractableGameObject: {fileID: 0}
   isInteracting: 0
@@ -170,6 +203,7 @@ MonoBehaviour:
   rt_Input: 0
   jump_Input: 0
   inventoryInput: 0
+  lockOnInput: 0
   d_Pad_Up: 0
   d_Pad_Down: 0
   d_Pad_Left: 0
@@ -178,6 +212,7 @@ MonoBehaviour:
   sprintFlag: 0
   comboFlag: 0
   inventoryFlag: 0
+  lockOnFlag: 0
   rollInputTimer: 0
 --- !u!114 &2155725705769924770
 MonoBehaviour:
@@ -249,7 +284,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1253086935255656, guid: e0e1a17ee2a364d688b1856db9e89674, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player Model
       objectReference: {fileID: 0}
     - target: {fileID: 4532250632830336, guid: e0e1a17ee2a364d688b1856db9e89674, type: 3}
       propertyPath: m_RootOrder

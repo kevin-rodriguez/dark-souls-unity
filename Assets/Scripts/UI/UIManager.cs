@@ -64,7 +64,6 @@ namespace KR
 
       if (equimentWindowUI != null)
       {
-        print(equimentWindowUI);
         equimentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
       }
     }

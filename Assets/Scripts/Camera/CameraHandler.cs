@@ -7,6 +7,7 @@ namespace KR
 
   public class CameraHandler : MonoBehaviour
   {
+    InputHandler inputHandler;
     public Transform targetTransform;
     public Transform cameraTransform;
     public Transform cameraPivotTransform;
@@ -30,6 +31,10 @@ namespace KR
     public float cameraCollisionOffset = 0.2f;
     public float minimumCollisionOffset = 0.2f;
 
+    List<CharacterManager> availableTargets = new List<CharacterManager>();
+    public Transform nearestLockOnTarget;
+    public Transform currentLockOnTarget;
+    public float maximumLockOnDistance = 30;
 
     private void Awake()
     {
@@ -37,6 +42,7 @@ namespace KR
       defaultPosition = cameraTransform.localPosition.z;
       ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
       targetTransform = FindObjectOfType<PlayerManager>().transform;
+      inputHandler = FindObjectOfType<InputHandler>();
     }
 
     public void FollowTarget(float delta)
@@ -50,22 +56,45 @@ namespace KR
 
     public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
     {
-      lookAngle += mouseXInput * lookSpeed * delta;
-      pivotAngle -= mouseYInput * pivotSpeed * delta;
+      if (!inputHandler.lockOnInput && currentLockOnTarget == null)
+      {
+        lookAngle += mouseXInput * lookSpeed * delta;
+        pivotAngle -= mouseYInput * pivotSpeed * delta;
 
-      // Add limits to camera movement
-      pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
+        // Add limits to camera movement
+        pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
 
-      Vector3 rotation = Vector3.zero;
-      rotation.y = lookAngle;
-      Quaternion targetRotation = Quaternion.Euler(rotation);
-      myTransform.rotation = targetRotation;
+        Vector3 rotation = Vector3.zero;
+        rotation.y = lookAngle;
+        Quaternion targetRotation = Quaternion.Euler(rotation);
+        myTransform.rotation = targetRotation;
 
-      rotation = Vector3.zero;
-      rotation.x = pivotAngle;
+        rotation = Vector3.zero;
+        rotation.x = pivotAngle;
 
-      targetRotation = Quaternion.Euler(rotation);
-      cameraPivotTransform.localRotation = targetRotation;
+        targetRotation = Quaternion.Euler(rotation);
+        cameraPivotTransform.localRotation = targetRotation;
+      }
+      else
+      {
+        float velocity = 0;
+
+        Vector3 direction = currentLockOnTarget.position - transform.position;
+        direction.Normalize();
+        direction.y = 0;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = targetRotation;
+
+        direction = currentLockOnTarget.position - cameraPivotTransform.position;
+        direction.Normalize();
+
+        // Force camera rotation to target
+        targetRotation = Quaternion.LookRotation(direction);
+        Vector3 eulerAngles = targetRotation.eulerAngles;
+        eulerAngles.y = 0;
+        cameraPivotTransform.localEulerAngles = eulerAngles;
+      }
     }
 
     private void HandleCameraCollisions(float delta)
@@ -95,6 +124,55 @@ namespace KR
       cameraTransformPosition.z = Mathf.Lerp(cameraTransform.localPosition.z, targetPosition, delta / 0.2f);
       cameraTransform.localPosition = cameraTransformPosition;
     }
+
+    public void HandleLockOn()
+    {
+      float shortestDistanceToTarget = Mathf.Infinity;
+      float collidingDistance = 26;
+
+      Collider[] colliders = Physics.OverlapSphere(targetTransform.position, collidingDistance);
+
+      foreach (Collider collider in colliders)
+      {
+        CharacterManager character = collider.GetComponent<CharacterManager>();
+
+        if (character != null)
+        {
+          Vector3 lockTargetDirection = character.transform.position - targetTransform.position;
+          float distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);
+          float viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
+
+          bool isPlayerTarget = character.gameObject == targetTransform.gameObject;
+          bool inViewableAngle = viewableAngle > -50 && viewableAngle < 50;
+          bool inDistance = distanceFromTarget <= maximumLockOnDistance;
+
+          if (!isPlayerTarget && inViewableAngle && inDistance)
+          {
+            availableTargets.Add(character);
+          }
+
+          foreach (CharacterManager availableTarget in availableTargets)
+          {
+            float distanceFromAvailableTarget = Vector3.Distance(targetTransform.position, availableTarget.transform.position);
+
+            if (distanceFromAvailableTarget < shortestDistanceToTarget)
+            {
+              shortestDistanceToTarget = distanceFromAvailableTarget;
+              nearestLockOnTarget = availableTarget.lockOnTransform;
+            }
+          }
+
+        }
+      }
+    }
+
+    public void ClearLockOnTargets()
+    {
+      availableTargets.Clear();
+      nearestLockOnTarget = null;
+      currentLockOnTarget = null;
+    }
+
   }
 }
 
